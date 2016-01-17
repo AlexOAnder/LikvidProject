@@ -17,15 +17,15 @@ public class TableClass {
 		Passive3 = rs.getInt(9);
 		Passive4 = rs.getInt(10);
 	}
-	private int Id;
-	private String Name;
-	private int Active1;
-	private int Active2;
-	private int Active3;
-	private int Active4;
+	public int Id;
+	public String Name;
+	public int Active1;
+	public int Active2;
+	public int Active3;
+	public int Active4;
 	
-	private int Passive1;
-	private int Passive2;
-	private int Passive3;
-	private int Passive4;
+	public int Passive1;
+	public int Passive2;
+	public int Passive3;
+	public int Passive4;
 }
