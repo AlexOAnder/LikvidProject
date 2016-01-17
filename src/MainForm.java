@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -62,7 +63,8 @@ public class MainForm {
 	private void initialize(){
 		frame = new JFrame();
 		frame.setTitle("likvid Project");
-		frame.setBounds(100, 100, 716, 485);
+		frame.setPreferredSize(new Dimension(710,480));
+		frame.setBounds(100, 100, 710, 485);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -80,6 +82,8 @@ public class MainForm {
 		
 		frame.getContentPane().add(scrollPane);
 		frame.setLocationRelativeTo(null);
+		frame.pack();
+		frame.setResizable(false);
 		frame.setVisible(true);
 
 	}
