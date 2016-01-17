@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +17,7 @@ import javax.swing.table.TableModel;
 
 import dbPackage.DataBaseProvider;
 import dbPackage.TableClass;
+import javax.swing.ListSelectionModel;
 
 
 
@@ -68,12 +70,15 @@ public class MainForm {
 		TableModel model = new MyTableModel(tableDataList);
 
 		table = new JTable(model);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setFillsViewportHeight(true);
 
-		table.setBounds(10, 11, 665, 196);
-		
+		table.setBounds(10, 11, 680, 196);
 
-		frame.getContentPane().add(table);
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(10, 11, 680, 196);
 		
+		frame.getContentPane().add(scrollPane);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
@@ -161,7 +166,7 @@ public class MainForm {
 		public MyTableModel(List<TableClass> data) {
 	            this.rows = data;
 	    }
-		
+
 		public String getColumnName(int columnIndex) {
 	        switch (columnIndex) {
 	        case 0:
