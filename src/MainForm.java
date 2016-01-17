@@ -153,7 +153,6 @@ public class MainForm {
                     	  IsLikvidLabel.setText("\u041D\u0435\u0442");
                       }
                       double res = CalculatePayability(model,selIndex);
-                      
                       PayableValueLabel.setText(String.format("%.2f",res));
                  }                   
             }             
@@ -261,19 +260,19 @@ public class MainForm {
 	        case 2:
 	            return row.getActive1();
 	        case 3:
-	            return row.getActive1();
-	        case 4:
-	            return row.getActive1();
-	        case 5:
-	            return row.getActive1();
-	        case 6:
-	            return row.getActive1();
-	        case 7:
 	            return row.getActive2();
-	        case 8:
+	        case 4:
 	            return row.getActive3();
-	        case 9:
+	        case 5:
 	            return row.getActive4();
+	        case 6:
+	            return row.getPassive1();
+	        case 7:
+	            return row.getPassive2();
+	        case 8:
+	            return row.getPassive3();
+	        case 9:
+	            return row.getPassive4();
 	        }
             return "";
 		}
