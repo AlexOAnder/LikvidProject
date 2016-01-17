@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JFrame;
@@ -11,14 +13,35 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import dbPackage.DataBaseProvider;
+import dbPackage.MyTableModel;
+import dbPackage.TableClass;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JPanel;
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.FlowLayout;
+import javax.swing.border.BevelBorder;
+import javax.swing.BoxLayout;
+import java.awt.BorderLayout;
+import java.awt.Insets;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 /*Разработать GUI-приложение с организацией взаимодействия с БД, реализующий методику 
 расчета показателей для оценки ликвидности и платежеспо-собности предприятия.*/
 public class MainForm {
 
 	private JFrame frame;
-	private JTable table;
 
+	private JTable table;
+	
+	private List<TableClass> tableDataList;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -26,6 +49,7 @@ public class MainForm {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					DataBaseProvider.GetInstance();
 					MainForm window = new MainForm();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -39,76 +63,56 @@ public class MainForm {
 	 * Create the application.
 	 */
 	public MainForm() {
-		try {
-			initialize();	
-			ShowTableFromDb();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
+		initialize();
+		ShowTableFromDb();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(){
 		frame = new JFrame();
 		frame.setTitle("likvid Project");
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 716, 485);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
-
+		
+		
 		table = new JTable();
-
-		JTable table = new JTable(data, columnNames) {
-			public Class getColumnClass(int column) {
-				for (int row = 0; row < getRowCount(); row++) {
-					Object o = getValueAt(row, column);
-					if (o != null) {
-						return o.getClass();
-					}
-				}
-				return Object.class;
-			}
-		};
-
-		table.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null }, { null, null, null, null }, { null, null, null, null },
-						{ null, null, null, null }, },
-				new String[] { "New column", "New column", "New column", "New column" }));
-		table.setBounds(52, 35, 330, 166);
+		table.setBounds(10, 11, 665, 313);
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(653, 11, 22, 313);
+		frame.getContentPane().add(scrollPane);
 		frame.getContentPane().add(table);
+
 	}
 
-	public void ShowTableFromDb() throws SQLException {
-		Vector columnNames = new Vector();
-		Vector data = new Vector();
+	public void ShowTableFromDb() {
+		
 		try {
 			Statement s = DataBaseProvider.GetNewStatement();
-			String sql = "Select * from likvid.organization as org " + "INNER JOIN "
-					+ "actives as act ON act.OrganisationId = org.Id " + "INNER JOIN"
-					+ "passives as pas ON pas.OrganisationId = org.Id";
+			String sql = "Select * from likvid.organization as org "
+					+ "INNER JOIN likvid.actives as act ON act.OrganizationId = org.Id "
+					+ "INNER JOIN likvid.passives as pas ON pas.OrganizationId = org.Id ";
 			ResultSet rs = s.executeQuery(sql);
 
 			ResultSetMetaData md = rs.getMetaData();
 			// get counts of the columns
 			int columns = md.getColumnCount();
 			
-			 //  Get the names of the columns
-            for (int i = 1; i <= columns; i++) {
-                columnNames.addElement(md.getColumnName(i));
-            }
+			tableDataList.clear();
 
             // read every row with .next
             while (rs.next()) {
-                Vector row = new Vector(columns);
-                for (int i = 1; i <= columns; i++) {
-                    row.addElement(rs.getObject(i));
-                }
-                data.addElement(row);
+            	TableClass p = new TableClass(rs);
+                tableDataList.add(p);
             }
             rs.close();
             s.close();
-		} catch (Exception ex) {
+
+		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
 	}
