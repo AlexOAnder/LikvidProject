@@ -45,9 +45,9 @@ public class DataBaseProvider{
 			Connect = DriverManager.getConnection(uri,login,pass);
 			// create a statement
 			Statement = Connect.createStatement();
-			boolean res = Statement.execute("Select * from fmdat.customer");
+			boolean res = Statement.execute("Select * from likvid.organization");
 			if (res)
-				System.out.println("Connected to fmdat");
+				System.out.println("Connected to likvid");
 			else
 				System.out.println("Something wrong! Check SQL connect");
 		}
