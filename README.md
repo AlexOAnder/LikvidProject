@@ -1,5 +1,5 @@
 # LikvidProject
-Java gui learning
+Java gui learning (Eclipse IDE)
 
 Теория
 ------------
