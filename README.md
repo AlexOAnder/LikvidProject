@@ -20,3 +20,4 @@ L1 = ( A1 + 0.5 A2 + 0.3 A3 ) / (П1 + 0.5 П2 + 0.3 П3)
 
 GUI
 -----------
+![image](https://cloud.githubusercontent.com/assets/10232613/12379579/5f53a88c-bd6e-11e5-9d16-cc616a0c67ba.png)
