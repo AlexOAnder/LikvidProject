@@ -100,9 +100,9 @@ public class MainForm {
 		label.setBounds(10, 11, 330, 30);
 		panel.add(label);
 		
-		JLabel PayableValueLabel = new JLabel("");
+		JLabel PayableValueLabel = new JLabel("0.0");
 		PayableValueLabel.setFont(new Font("Arial", Font.BOLD, 22));
-		PayableValueLabel.setBounds(232, 131, 108, 52);
+		PayableValueLabel.setBounds(247, 131, 108, 52);
 		panel.add(PayableValueLabel);
 		
 		JLabel label_1 = new JLabel("\u041E\u0431\u0449\u0438\u0439 \u043F\u043E\u043A\u0430\u0437\u0430\u0442\u0435\u043B\u044C \u043F\u043B\u0430\u0442\u0435\u0436\u0435\u0441\u043F\u043E\u0441\u043E\u0431\u043D\u043E\u0441\u0442\u0438");
@@ -110,14 +110,14 @@ public class MainForm {
 		label_1.setBounds(10, 93, 410, 36);
 		panel.add(label_1);
 		
-		JLabel IsLikvidLabel = new JLabel("");
+		JLabel IsLikvidLabel = new JLabel("None");
 		IsLikvidLabel.setFont(new Font("Arial", Font.BOLD, 22));
 		IsLikvidLabel.setBounds(206, 41, 55, 52);
 		panel.add(IsLikvidLabel);
 		
 		JLabel label_3 = new JLabel("L1 = ");
 		label_3.setFont(new Font("Arial", Font.BOLD, 22));
-		label_3.setBounds(142, 131, 55, 52);
+		label_3.setBounds(182, 131, 55, 52);
 		panel.add(label_3);
 		
 		JButton exitButton = new JButton("\u0412\u044B\u0445\u043E\u0434");
